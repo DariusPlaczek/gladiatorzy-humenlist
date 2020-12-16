@@ -10,7 +10,7 @@ function App() {
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const [userlist, setUserlist] = useState([])
-  const [countImages, setCountImages] = useState(0)
+  const [countImages, setCountImages] = useState(4)
 //  const windowHeight = window.innerHeight;
 
 
@@ -43,6 +43,7 @@ function App() {
 
   const scrollY = () => {
     setScroll((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+    console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
   }
 
   useEffect(() => {
@@ -67,7 +68,7 @@ function App() {
 
 
   return (
-    <div className="main-container">
+
       <div className="content">
           <h1>UsersList</h1>
           {isError && <p className="error">An error has occurred</p>}
@@ -77,7 +78,7 @@ function App() {
                   ))}
           </div>
       </div>
-    </div>
+
   );
 }
 
