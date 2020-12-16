@@ -10,12 +10,9 @@ function App() {
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const [userlist, setUserlist] = useState([])
-  const windowHeight = window.innerHeight;
+  const [countImages, setCountImages] = useState(0)
+//  const windowHeight = window.innerHeight;
 
-  const scrollY = () => {
-    setScroll(window.innerHeight + window.scrollY)
-  //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
-  }
 
   useEffect(() => {
     fetch('http://localhost:3000/userData.json')
@@ -33,7 +30,6 @@ function App() {
   useEffect(() => {
     function name() {
       window.addEventListener("scroll", scrollY)
-    //  console.log(windowHeight);
     }
     name();
 
@@ -45,28 +41,42 @@ function App() {
   //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
   })
 
+  const scrollY = () => {
+    setScroll((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+  }
+
+  useEffect(() => {
+    if (scroll) {
+      setCountImages((prevState) => prevState + 3)
+    }
+  }, [scroll])
+
   useEffect(() => {
     const cacheUser = [];
 
-    if (scroll && !isLoading) {
-      for (let i = 0; i < 6; i++) {
-        cacheUser.push(users[i])
-        console.log(cacheUser);
-      }
+    if (!scroll || isLoading) {
+      return
     }
+
+    for (let i = 0; i < countImages; i++) {
+      cacheUser.push(users[i])
+    }
+
     setUserlist(cacheUser)
   }, [scroll, isLoading])
 
 
   return (
-    <div className="content">
-        <h1>UsersList</h1>
-        {isError && <p className="error">An error has occurred</p>}
-        <div className="list-wrapper borderTop" >
-                {userlist.map((value, id) => (
-                    <User key={`${id}-${value.name.first}`} value={value} />
-                ))}
-        </div>
+    <div className="main-container">
+      <div className="content">
+          <h1>UsersList</h1>
+          {isError && <p className="error">An error has occurred</p>}
+          <div className="list-wrapper borderTop" >
+                  {userlist && userlist.map((value, id) => (
+                      <User key={`${id}-${value.name.first}`} value={value} />
+                  ))}
+          </div>
+      </div>
     </div>
   );
 }
