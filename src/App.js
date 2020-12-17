@@ -57,25 +57,21 @@ function App() {
 
   useEffect(() => {
     const cacheUser = [];
-    
-    if (countImages === users.length) {
-      console.log('Ist gleich lang');
+
+    if (userlist.length === users.length) {
       return
     }
 
     if (!scroll || isLoading) {
       return
     }
-    console.log(countImages);
-    console.log(users.length);
-
 
     for (let i = 0; i < countImages; i++) {
       cacheUser.push(users[i])
     }
 
     setUserlist(cacheUser)
-  }, [scroll, isLoading, countImages, users])
+  }, [scroll, isLoading, countImages, users, userlist])
 
 
   return (
