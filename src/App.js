@@ -33,38 +33,49 @@ function App() {
     }
     name();
 
-    return () =>  window.removeEventListener("scroll", scrollY);
   //  console.log(document.body.offsetHeight);
   //  console.log(window.innerHeight);
   //  console.log(window.scrollY);
+    return () =>  window.removeEventListener("scroll", scrollY);
   //  console.log(window.innerHeight + window.scrollY);
   //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
   })
 
   const scrollY = () => {
     setScroll((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
-    console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
+  //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
   }
 
   useEffect(() => {
+
+
+
     if (scroll) {
-      setCountImages((prevState) => prevState + 3)
+      setCountImages((prevState) => prevState + 1)
     }
   }, [scroll])
 
   useEffect(() => {
     const cacheUser = [];
+    
+    if (countImages === users.length) {
+      console.log('Ist gleich lang');
+      return
+    }
 
     if (!scroll || isLoading) {
       return
     }
+    console.log(countImages);
+    console.log(users.length);
+
 
     for (let i = 0; i < countImages; i++) {
       cacheUser.push(users[i])
     }
 
     setUserlist(cacheUser)
-  }, [scroll, isLoading])
+  }, [scroll, isLoading, countImages, users])
 
 
   return (
