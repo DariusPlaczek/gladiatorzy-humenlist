@@ -36,10 +36,11 @@ function App() {
   //  console.log(document.body.offsetHeight);
   //  console.log(window.innerHeight);
   //  console.log(window.scrollY);
+  //console.log(window.innerHeight + window.scrollY);
     return () =>  window.removeEventListener("scroll", scrollY);
   //  console.log(window.innerHeight + window.scrollY);
   //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
-  })
+  }, [])
 
   const scrollY = () => {
     setScroll((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
@@ -48,30 +49,23 @@ function App() {
 
   useEffect(() => {
 
-
-
+  
     if (scroll) {
       setCountImages((prevState) => prevState + 1)
     }
   }, [scroll])
 
   useEffect(() => {
-    const cacheUser = [];
 
-    if (userlist.length === users.length) {
+    if (!scroll || isLoading ) {
       return
     }
+    
+    //console.log(users && users.slice(0, countImages));
 
-    if (!scroll || isLoading) {
-      return
-    }
+    setUserlist(users && users.slice(0, countImages))
 
-    for (let i = 0; i < countImages; i++) {
-      cacheUser.push(users[i])
-    }
-
-    setUserlist(cacheUser)
-  }, [scroll, isLoading, countImages, users, userlist])
+  }, [scroll, isLoading, users, countImages])
 
 
   return (
