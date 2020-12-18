@@ -11,7 +11,6 @@ function App() {
   const [isError, setError] = useState(false)
   const [userlist, setUserlist] = useState([])
   const [countImages, setCountImages] = useState(4)
-//  const windowHeight = window.innerHeight;
 
 
   useEffect(() => {
@@ -28,6 +27,7 @@ function App() {
   }, [])
 
   useEffect(() => {
+
     function name() {
       window.addEventListener("scroll", scrollY)
     }
@@ -38,18 +38,17 @@ function App() {
   //  console.log(window.scrollY);
   //console.log(window.innerHeight + window.scrollY);
     return () =>  window.removeEventListener("scroll", scrollY);
-  //  console.log(window.innerHeight + window.scrollY);
-  //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
+
   }, [])
 
+
   const scrollY = () => {
-    setScroll((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
-  //  console.log((window.innerHeight + window.scrollY) >= document.body.offsetHeight);
+  //  console.log(document.body.scrollHeight);
+    setScroll((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100)
   }
 
   useEffect(() => {
 
-  
     if (scroll) {
       setCountImages((prevState) => prevState + 1)
     }
@@ -60,26 +59,26 @@ function App() {
     if (!scroll || isLoading ) {
       return
     }
-    
-    //console.log(users && users.slice(0, countImages));
 
     setUserlist(users && users.slice(0, countImages))
 
   }, [scroll, isLoading, users, countImages])
 
 
-  return (
 
-      <div className="content">
+  return (
+    
+    <div className="main-container">
+    <div id="contents" className="content">
           <h1>UsersList</h1>
           {isError && <p className="error">An error has occurred</p>}
           <div className="list-wrapper borderTop" >
                   {userlist && userlist.map((value, id) => (
-                      <User key={`${id}-${value.name.first}`} value={value} />
-                  ))}
+                    <User key={`${id}-${value.name.first}`} value={value} />
+                    ))}
           </div>
       </div>
-
+      </div>
   );
 }
 
