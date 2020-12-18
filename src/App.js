@@ -33,17 +33,12 @@ function App() {
     }
     name();
 
-  //  console.log(document.body.offsetHeight);
-  //  console.log(window.innerHeight);
-  //  console.log(window.scrollY);
-  //console.log(window.innerHeight + window.scrollY);
     return () =>  window.removeEventListener("scroll", scrollY);
 
   }, [])
 
 
   const scrollY = () => {
-  //  console.log(document.body.scrollHeight);
     setScroll((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100)
   }
 
@@ -64,21 +59,18 @@ function App() {
 
   }, [scroll, isLoading, users, countImages])
 
-
-
   return (
-    
     <div className="main-container">
-    <div id="contents" className="content">
-          <h1>UsersList</h1>
-          {isError && <p className="error">An error has occurred</p>}
-          <div className="list-wrapper borderTop" >
-                  {userlist && userlist.map((value, id) => (
-                    <User key={`${id}-${value.name.first}`} value={value} />
-                    ))}
-          </div>
+      <div id="contents" className="content">
+        <h1>UsersList</h1>
+        {isError && <p className="error">An error has occurred</p>}
+        <div className="list-wrapper borderTop" >
+          {userlist && userlist.map((value, id) => (
+            <User key={`${id}-${value.name.first}`} value={value} />
+          ))}
+        </div>
       </div>
-      </div>
+    </div>
   );
 }
 
