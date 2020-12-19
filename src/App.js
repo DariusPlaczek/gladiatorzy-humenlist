@@ -14,10 +14,10 @@ function App() {
 
 
   useEffect(() => {
-    fetch('http://localhost:3000/userData.json')
+    fetch('https://randomuser.me/api/?results=200')
     .then(response => response.json())
     .then((userData )=> {
-      setUsers(userData);
+      setUsers(userData.results);
       setLoading(false);
     })
     .catch((error) => {

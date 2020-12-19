@@ -52,7 +52,6 @@ a {
 	text-align: center;
 	text-transform: uppercase;
 	border-radius: 0 15px 15px 0;
-	cursor: pointer;
 	text-decoration: none;
 	color: #FFD500;
 	margin-left: -35px;
@@ -87,7 +86,7 @@ a {
 	top: 25px;
 	right: 25px;
 	width: 29px;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 .toogle-bar {
@@ -155,7 +154,7 @@ a {
 
 .ulc-utils {
 	transition: all .3s ease-out;
-	cursor: pointer;
+	/* cursor: pointer; */
 }
 
 .ulc-utils:hover {
@@ -189,7 +188,7 @@ input, button {
 
 button {
 	font-weight: 800;
-	cursor: pointer;
+	/* cursor: pointer; */
 	-webkit-box-shadow: 4px 4px 7px -7px #000000;
 	box-shadow: 4px 4px 7px -7px #000000;
 }
